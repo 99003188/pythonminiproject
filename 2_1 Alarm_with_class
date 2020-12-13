@@ -4,7 +4,7 @@ import datetime
 import re
 
 
-#
+# class for main setup alarm
 class alarm():
     print("Enter the time in 12 hours format(HH:MM) ")
 
