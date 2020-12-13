@@ -1,69 +1,91 @@
+# import datetime module
 import datetime
+# import regular expression module
 import re
-global alarm_minute,alarm_hour
+
+
+#
 class alarm():
-    def __init__(self,alarm_minute=0,alarm_hour=0,alarm_am_pm=0):  
-        self.alarm_minute=alarm_minute
-        self.alarm_hour=alarm_hour
-        self.alarm_am_pm=alarm_am_pm
-        self.lg=self.label()                                        
-    def alarm_setup(self):
-        print("Enter the time in 12 hours format(HH:MM) ")
+    print("Enter the time in 12 hours format(HH:MM) ")
+
+# constructor to intialize variables required for function
+    def __init__(self, alarm_minute=0, alarm_hour=0, alarm_am_pm=0):
         self.alarm_hour = int(input("Enter HH: "))
+        self.alarm_minute = int(input("Enter MM: "))
+        self.alarm_am_pm = str(input("am or pm: "))
+        self.lg = self.label()
+
+# method for setup for alarm
+    def alarm_setup(self):
         if (self.alarm_hour > 13 or self.alarm_hour < 1):
             print("please enter a valid time")
             exit()
-        self.alarm_minute = int(input("Enter MM: "))
         if (self.alarm_minute > 61 or self.alarm_minute < 0):
             print("please enter a valid time")
             exit()
-        self.alarm_am_pm = str(input("am or pm: "))
         if (self.alarm_am_pm != "am" and self.alarm_am_pm != "pm"):
             print("please enter valid details")
             exit()
-        if (self.alarm_am_pm == 'pm' and self.alarm_hour>12):
+        if (self.alarm_am_pm == 'pm'):
             self.alarm_hour = self.alarm_hour+12
         while(1):
             if (self.alarm_hour == datetime.datetime.now().hour and
-                self.alarm_minute == datetime.datetime.now().minute):
+               self.alarm_minute == datetime.datetime.now().minute):
                 print("wake up now")
                 break
-    class label:                                                 # class inside a class
+
+# creating a class for label, which is used to note down important requirements
+    class label:
         def label_show(self):
-            enter_label=str(input("Enter the label"))
-        
-class snooze(alarm):                                             #single level inheritence
-        def alarm_snooze(self):
-           miss_var1 = str(input("Enter Y to snooze "))
-           if (miss_var1 == "Y"):
-               alarm_snooze_minute = int(input("Enter the snooze time in MM format: "))
-           else:
-               exit()
-           self.alarm_minute = self.alarm_minute + alarm_snooze_minute
-           if (alarm_snooze_minute > 31 or alarm_snooze_minute < 0):
+            enter_label = str(input("Enter the label"))
+
+
+# creating a class for snooze option
+class snooze(alarm):
+    # creating a constructor for intializing the variables
+    def __init(self, alarm_minute1=0, alarm_hour1=0):
+        self.alarm_minute1 = self.alarm_minute
+
+# creating a method called as snooze
+    def alarm_snooze(self):
+        miss_var1 = str(input("Enter Y to snooze "))
+        if (miss_var1 == "Y"):
+            alarm_snooze_min = int(input("Enter the snooze time in MM format"))
+        else:
+            exit()
+        self.alarm_minute = self.alarm_minute + alarm_snooze_min
+        if (alarm_snooze_min > 31 or alarm_snooze_min < 0):
             print("Enter a valid time: ")
             exit()
-           if(self.alarm_minute > 61):
-               self.alarm_hour = self.alarmhour+1
-               if (self.alarm_hour > 12):
-                   self.alarm_hour = 1
-                   self.alarm_minute = self.alarm_minute+alarm_snooze_minute-60
-           while(1):
-               if (self.alarm_hour == datetime.datetime.now().hour and
-                self.alarm_minute == datetime.datetime.now().minute):
-                   print("wake up now")
-                   print(enter_label)
-                   break
+            if(self.alarm_minute > 61):
+                self.alarm_hour = self.alarmhour+1
+                if (self.alarm_hour > 12):
+                    self.alarm_hour = 1
+                    self.alarm_minute = self.alarm_minute+alarm_snooze_min-60
+
+# method to print after alarm
+    def alarm_snooze_function(self):
+        if (self.alarm_am_pm == 'pm'):
+            self.alarm_hour = self.alarm_hour+12
+        while(1):
+            if (self.alarm_hour == datetime.datetime.now().hour and
+               self.alarm_minute == datetime.datetime.now().minute):
+                print("wake up now")
+                break
+
+
+# creating a class to display the final comments
 class display(snooze):
     def display_output(self):
-        print("Thank you for using alarm clock");
+        print("Thank you for using alarm clock")
 object1 = alarm()
 object2 = snooze()
-object3=object2.lg               
-object4=display()                   
+object3 = object2.lg
+object4 = display()
 object1.alarm_setup()
-object3.label_show()            
+object3.label_show()
 object2.alarm_snooze()
+object2.alarm_snooze_function()
 object4.display_output()
-print(re.search("[a-z]+[1-9][@][a-z]+[.][a-z]+", "prabhurithesh1@gmail.com"))          
-
+# regular expressions
+print(re.search("[a-z]+[1-9][@][a-z]+[.][a-z]+", "prabhurithesh1@gmail.com"))
