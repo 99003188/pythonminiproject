@@ -12,7 +12,7 @@ alarm_am_pm = str(input("am or pm: "))
 if (alarm_am_pm != "am" and alarm_am_pm != "pm"):
     print("please enter valid details")
     exit()
-if (alarm_am_pm == 'pm' and alarm_hour>12):
+if (alarm_am_pm == 'pm' and alarm_hour > 12):
         alarm_hour = alarm_hour+12
 
 
