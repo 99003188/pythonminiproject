@@ -4,15 +4,18 @@ import datetime
 import re
 
 
-#
+# class for main setup alarm
 class alarm():
     print("Enter the time in 12 hours format(HH:MM) ")
+    alarm_minute = 0
+    alarm_hour = 0
+    alarm_am_pm = 0
 
 # constructor to intialize variables required for function
-    def __init__(self, alarm_minute=0, alarm_hour=0, alarm_am_pm=0):
-        self.alarm_hour = int(input("Enter HH: "))
-        self.alarm_minute = int(input("Enter MM: "))
-        self.alarm_am_pm = str(input("am or pm: "))
+    def __init__(self, alarm_minute1, alarm_hour1, alarm_am_pm1):
+        self.alarm_hour = alarm_hour1
+        self.alarm_minute = alarm_minute1
+        self.alarm_am_pm = alarm_am_pm1
         self.lg = self.label()
 
 # method for setup for alarm
@@ -37,7 +40,7 @@ class alarm():
 # creating a class for label, which is used to note down important requirements
     class label:
         def label_show(self):
-            enter_label = str(input("Enter the label"))
+            enter_label = str(input("Enter the label: "))
 
 
 # creating a class for snooze option
@@ -48,7 +51,7 @@ class snooze(alarm):
 
 # creating a method called as snooze
     def alarm_snooze(self):
-        miss_var1 = str(input("Enter Y to snooze "))
+        miss_var1 = str(input("Enter Y to snooze: "))
         if (miss_var1 == "Y"):
             alarm_snooze_min = int(input("Enter the snooze time in MM format"))
         else:
@@ -78,15 +81,14 @@ class snooze(alarm):
 class display(snooze):
     def display_output(self):
         print("Thank you for using alarm clock")
-object1 = alarm()
-object2 = snooze()
-object3 = object2.lg
-object4 = display()
-object1.alarm_setup()
+object4 = display(alarm_hour1=int(input("Enter HH: ")),
+                  alarm_minute1=int(input("Enter MM:")),
+                  alarm_am_pm1=input("Enter am or pm: "))
+object3 = object4.lg
+object4.alarm_setup()
 object3.label_show()
-object2.alarm_snooze()
-object2.alarm_snooze_function()
+object4.alarm_snooze()
+object4.alarm_snooze_function()
 object4.display_output()
 # regular expressions
 print(re.search("[a-z]+[1-9][@][a-z]+[.][a-z]+", "prabhurithesh1@gmail.com"))
-
